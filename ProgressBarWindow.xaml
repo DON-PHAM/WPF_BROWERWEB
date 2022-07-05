@@ -1,0 +1,26 @@
+﻿<Window x:Class="KDCLGD.ProgressBarWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KDCLGD" WindowStyle="None" WindowStartupLocation="CenterOwner" ShowInTaskbar="False"
+        mc:Ignorable="d" x:Name="progressbar"
+        xmlns:convert="clr-namespace:KDCLGD.Converters"
+        Height="100" Width="300">
+    <Grid Margin="20">
+        <ProgressBar Value="{Binding ElementName=progressbar,Path=CurrentFileSize,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Maximum="{Binding ElementName=progressbar,Path=FileSize,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Name="pbStatus" />
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="DemiBold">
+            <TextBlock.Text>
+                <MultiBinding>
+                    <MultiBinding.Converter>
+                        <convert:SizeProgessConverter />
+                    </MultiBinding.Converter>
+                    <MultiBinding.Bindings>
+                        <Binding Path="CurrentFileSize" ElementName="progressbar" UpdateSourceTrigger="PropertyChanged" Mode="OneWay"/>
+                        <Binding Path="FileSize" ElementName="progressbar" UpdateSourceTrigger="PropertyChanged" Mode="OneWay"/>
+                    </MultiBinding.Bindings>
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+    </Grid>
+</Window>
